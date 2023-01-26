@@ -1,6 +1,6 @@
 # G-GiveCar
 
-G-GiveCar is a script for QBCore providing a command to give a new car to an online citizen.
+G-GiveCar is a script for QBCore providing a command to give a new car to an online citizen by putting it in their garage.
 
 <h1>INSTALLATION GUIDE</h1>
 
