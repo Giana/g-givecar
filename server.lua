@@ -4,10 +4,8 @@ QBCore = exports['qb-core']:GetCoreObject()
 
 local function isAllowedToGiveCar(player)
     if IsPlayerAceAllowed(player, Config.AceGroup) then
-        print("True")
         return true
     else
-        print("False")
         return false
     end
 end
@@ -19,7 +17,6 @@ local function GeneratePlate()
     if result then
         return GeneratePlate()
     else
-        print("Plate generated: " .. plate:upper())
         return plate:upper()
     end
 end
@@ -29,7 +26,6 @@ end
 RegisterNetEvent('g-givecar:server:RequestCommands', function()
     local src = source
     if isAllowedToGiveCar(src) then
-        print("Is allowed, request commands")
         TriggerClientEvent('g-givecar:client:RequestCommands', src, true)
     end
 end)

@@ -2,7 +2,6 @@
 
 AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
     if Config.CommandEnabled then
-        print("Command enabled")
         TriggerServerEvent('g-givecar:server:RequestCommands')
     end
 end)
