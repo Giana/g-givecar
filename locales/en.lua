@@ -8,7 +8,14 @@ local Translations = {
     },
     other = {
         id = 'id',
-        model = 'model'
+        model = 'model',
+    },
+    text_message = {
+        sender = '04482',
+        sender_subject = 'Car Sent',
+        sender_message = 'You sent a new car.<br><br>Model: %{model}<br>Plate: %{plate}<br>Recipient: %{recipient}',
+        recipient_subject = 'Car Received',
+        recipient_message = 'You received a new car.<br><br>Model: %{model}<br>Plate: %{plate}<br>Pickup Location: %{garage}'
     }
 }
 

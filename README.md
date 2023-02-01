@@ -18,6 +18,7 @@ G-GiveCar is a script for QBCore providing a command to give a new car to an onl
     - Ex. /admingivecar 1 adder
 - Know which admin gave a car away via the "giver_admin" field in the player_vehicles table
 - Configure which garage the car goes to
+- Configure notifications on car send & receipt via text messages or pop-up notifications
 
 **IMAGES**
 -----
@@ -27,4 +28,5 @@ G-GiveCar is a script for QBCore providing a command to give a new car to an onl
 -----
 - QBCore - https://github.com/qbcore-framework
     - qb-core - https://github.com/qbcore-framework/qb-core
+    - qb-phone - https://github.com/qbcore-framework/qb-phone
 - oxmysql - https://github.com/overextended/oxmysql

@@ -12,16 +12,17 @@ shared_scripts {
 }
 
 client_scripts {
-    'client.lua'
+    'client/main.lua'
 }
 
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
-    'server.lua'
+    'server/main.lua'
 }
 
 dependencies {
     'qb-core',
+    'qb-phone',
     'oxmysql'
 }
 
