@@ -56,10 +56,10 @@ RegisterCommand(Config.GiveCarCommand, function(source, args)
                 Config.Garage,
                 aName
             })
-            TriggerClientEvent("QBCore:Notify", src, 'You gave ' .. carname .. ' with number plate ' .. plate .. ' to ' .. GetPlayerName(id) .. '!')
-            TriggerClientEvent('QBCore:Notify', id, 'You received ' .. carname .. " from an admin with the plate " .. plate .. '!')
+            TriggerClientEvent("QBCore:Notify", src, Lang:t('success.car_sent', { model = carname, plate = plate, recipient = GetPlayerName(id) }))
+            TriggerClientEvent('QBCore:Notify', id, Lang:t('info.car_received', { model = carname, plate = plate }))
             Wait(5500)
-            TriggerClientEvent('QBCore:Notify', id, 'Go to ' .. Config.GarageName .. ' to retrieve your new car.')
+            TriggerClientEvent('QBCore:Notify', id, Lang:t('info.retrieve_car', { garage = Config.GarageName }))
         end
     end
 end)

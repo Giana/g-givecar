@@ -8,6 +8,6 @@ end)
 
 RegisterNetEvent('g-givecar:client:RequestCommands', function(isAllowed)
     if isAllowed then
-        TriggerEvent('chat:addSuggestion', '/' .. Config.GiveCarCommand, '[id] [carname]', {})
+        TriggerEvent('chat:addSuggestion', '/' .. Config.GiveCarCommand, '[' .. Lang:t('other.id') .. '] [' .. Lang:t('other.model') .. ']', {})
     end
 end)
