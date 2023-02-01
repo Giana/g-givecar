@@ -56,10 +56,15 @@ RegisterCommand(Config.GiveCarCommand, function(source, args)
                 Config.Garage,
                 aName
             })
-            TriggerClientEvent("QBCore:Notify", src, Lang:t('success.car_sent', { model = carname, plate = plate, recipient = GetPlayerName(id) }))
-            TriggerClientEvent('QBCore:Notify', id, Lang:t('info.car_received', { model = carname, plate = plate }))
-            Wait(5500)
-            TriggerClientEvent('QBCore:Notify', id, Lang:t('info.retrieve_car', { garage = Config.GarageName }))
+            if Config.TextEnabled then
+                TriggerClientEvent('g-givecar:client:sendText', src, Lang:t('text_message.sender'), Lang:t('text_message.sender_subject'), Lang:t('text_message.sender_message', { model = carname, plate = plate, recipient = GetPlayerName(id) }))
+                TriggerClientEvent('g-givecar:client:sendText', id, Lang:t('text_message.sender'), Lang:t('text_message.recipient_subject'), Lang:t('text_message.recipient_message', { model = carname, plate = plate, garage = Config.GarageName }))
+            else
+                TriggerClientEvent("QBCore:Notify", src, Lang:t('success.car_sent', { model = carname, plate = plate, recipient = GetPlayerName(id) }))
+                TriggerClientEvent('QBCore:Notify', id, Lang:t('info.car_received', { model = carname, plate = plate }))
+                Wait(5500)
+                TriggerClientEvent('QBCore:Notify', id, Lang:t('info.retrieve_car', { garage = Config.GarageName }))
+            end
         end
     end
 end)
