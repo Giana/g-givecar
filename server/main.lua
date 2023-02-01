@@ -13,7 +13,7 @@ end
 -- Function credit: https://github.com/qbcore-framework/qb-vehicleshop
 local function GeneratePlate()
     local plate = QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomStr(2) .. QBCore.Shared.RandomInt(3) .. QBCore.Shared.RandomStr(2)
-    local result = MySQL.scalar.await('SELECT plate FROM player_vehicles WHERE plate = ?', {plate})
+    local result = MySQL.scalar.await('SELECT plate FROM player_vehicles WHERE plate = ?', { plate })
     if result then
         return GeneratePlate()
     else
@@ -35,11 +35,11 @@ end)
 RegisterCommand(Config.GiveCarCommand, function(source, args)
     if Config.CommandEnabled then
         local src = source
-        local carname = tostring(args[2])
+        local model = tostring(args[2])
         local id = tonumber(args[1])
         local plate = GeneratePlate()
 
-        if id and carname and IsPlayerAceAllowed(src, Config.AceGroup) then
+        if id and model and IsPlayerAceAllowed(src, Config.AceGroup) then
             local xAdmin = QBCore.Functions.GetPlayer(src)
             local aName = xAdmin.PlayerData.name
             local xTarget = QBCore.Functions.GetPlayer(id)
@@ -48,8 +48,8 @@ RegisterCommand(Config.GiveCarCommand, function(source, args)
             MySQL.insert('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state, garage, giver_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', {
                 xTarget.PlayerData.license,
                 cid,
-                carname,
-                GetHashKey(carname),
+                model,
+                GetHashKey(model),
                 '{}',
                 plate,
                 1,
@@ -57,11 +57,11 @@ RegisterCommand(Config.GiveCarCommand, function(source, args)
                 aName
             })
             if Config.TextEnabled then
-                TriggerClientEvent('g-givecar:client:sendText', src, Lang:t('text_message.sender'), Lang:t('text_message.sender_subject'), Lang:t('text_message.sender_message', { model = carname, plate = plate, recipient = GetPlayerName(id) }))
-                TriggerClientEvent('g-givecar:client:sendText', id, Lang:t('text_message.sender'), Lang:t('text_message.recipient_subject'), Lang:t('text_message.recipient_message', { model = carname, plate = plate, garage = Config.GarageName }))
+                TriggerClientEvent('g-givecar:client:sendText', src, Lang:t('text_message.sender'), Lang:t('text_message.sender_subject'), Lang:t('text_message.sender_message', { model = model, plate = plate, recipient = GetPlayerName(id) }))
+                TriggerClientEvent('g-givecar:client:sendText', id, Lang:t('text_message.sender'), Lang:t('text_message.recipient_subject'), Lang:t('text_message.recipient_message', { model = model, plate = plate, garage = Config.GarageName }))
             else
-                TriggerClientEvent("QBCore:Notify", src, Lang:t('success.car_sent', { model = carname, plate = plate, recipient = GetPlayerName(id) }))
-                TriggerClientEvent('QBCore:Notify', id, Lang:t('info.car_received', { model = carname, plate = plate }))
+                TriggerClientEvent('QBCore:Notify', src, Lang:t('success.car_sent', { model = model, plate = plate, recipient = GetPlayerName(id) }))
+                TriggerClientEvent('QBCore:Notify', id, Lang:t('info.car_received', { model = model, plate = plate }))
                 Wait(5500)
                 TriggerClientEvent('QBCore:Notify', id, Lang:t('info.retrieve_car', { garage = Config.GarageName }))
             end
