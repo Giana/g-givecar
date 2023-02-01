@@ -5,7 +5,11 @@ game 'gta5'
 author 'Giana - github.com/Giana'
 description 'g-givecar'
 
-shared_script 'config.lua'
+shared_scripts {
+    '@qb-core/shared/locale.lua',
+    'locales/en.lua',
+    'config.lua'
+}
 
 client_scripts {
     'client.lua'
