@@ -40,6 +40,10 @@ RegisterCommand(Config.GiveCarCommand, function(source, args)
             local xAdmin = QBCore.Functions.GetPlayer(src)
             local aName = xAdmin.PlayerData.name
             local xTarget = QBCore.Functions.GetPlayer(id)
+            if not xTarget then
+                TriggerClientEvent('QBCore:Notify', src, Lang:t('error.no_player', { id = tostring(id) }))
+                return
+            end
             local cid = xTarget.PlayerData.citizenid
             MySQL.insert('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state, garage, giver_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', {
                 xTarget.PlayerData.license,
