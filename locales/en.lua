@@ -1,4 +1,7 @@
 local Translations = {
+    error = {
+      no_player = 'Error: Cannot get online player from given server ID \'%{id}\''
+    },
     success = {
         car_sent = 'Car sent - Model: %{model} - Plate: %{plate} - Recipient: %{recipient}'
     },

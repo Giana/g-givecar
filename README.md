@@ -26,7 +26,11 @@ G-GiveCar is a script for FiveM QBCore providing a command to give a new car to 
 
 **DEPENDENCIES**
 -----
-- QBCore - https://github.com/qbcore-framework
-    - qb-core - https://github.com/qbcore-framework/qb-core
-    - qb-phone - https://github.com/qbcore-framework/qb-phone
-- oxmysql - https://github.com/overextended/oxmysql
+- [QBCore](https://github.com/qbcore-framework)
+    - [qb-core](https://github.com/qbcore-framework/qb-core)
+    - [qb-phone](https://github.com/qbcore-framework/qb-phone)
+- [oxmysql](https://github.com/overextended/oxmysql)
+
+**CREDIT**
+-----
+The code for generating a new license plate is from [qb-vehicleshop](https://github.com/qbcore-framework/qb-vehicleshop).

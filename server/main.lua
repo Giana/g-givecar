@@ -5,17 +5,15 @@ QBCore = exports['qb-core']:GetCoreObject()
 local function isAllowedToGiveCar(player)
     if IsPlayerAceAllowed(player, Config.AceGroup) then
         return true
-    else
-        return false
     end
+    return false
 end
 
--- Function credit: https://github.com/qbcore-framework/qb-vehicleshop
-local function GeneratePlate()
+local function generatePlate()
     local plate = QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomStr(2) .. QBCore.Shared.RandomInt(3) .. QBCore.Shared.RandomStr(2)
     local result = MySQL.scalar.await('SELECT plate FROM player_vehicles WHERE plate = ?', { plate })
     if result then
-        return GeneratePlate()
+        return generatePlate()
     else
         return plate:upper()
     end
@@ -37,14 +35,16 @@ RegisterCommand(Config.GiveCarCommand, function(source, args)
         local src = source
         local model = tostring(args[2])
         local id = tonumber(args[1])
-        local plate = GeneratePlate()
-
+        local plate = generatePlate()
         if id and model and IsPlayerAceAllowed(src, Config.AceGroup) then
             local xAdmin = QBCore.Functions.GetPlayer(src)
             local aName = xAdmin.PlayerData.name
             local xTarget = QBCore.Functions.GetPlayer(id)
+            if not xTarget then
+                TriggerClientEvent('QBCore:Notify', src, Lang:t('error.no_player', { id = tostring(id) }))
+                return
+            end
             local cid = xTarget.PlayerData.citizenid
-
             MySQL.insert('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state, garage, giver_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', {
                 xTarget.PlayerData.license,
                 cid,
