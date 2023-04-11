@@ -22,9 +22,7 @@ server_scripts {
 }
 
 dependencies {
-    'qb-core',
-    'qb-phone',
-    'oxmysql'
+    'qb-core'
 }
 
 lua54 'yes'
